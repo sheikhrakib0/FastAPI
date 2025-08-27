@@ -1,0 +1,6 @@
+1. create a virtual invironment (optional)
+2. Create a requirements text file and list the packages and libraries that are needed for this project.
+3. Fast API runs by uvicorn server, to run the server locally run this code on terminal
+    >uvicorn main:app --reload
+4. To exit the server 
+    Ctrl + C

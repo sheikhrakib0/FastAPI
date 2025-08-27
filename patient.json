@@ -1,0 +1,52 @@
+[
+    {
+        "id": "P001",
+        "name": "Jane Doe",
+        "city": "New York",
+        "age": 45,
+        "gender": "Female",
+        "height": 165,
+        "weight": 70,
+        "bmi": 25.71
+    },
+    {
+        "id": "P002",
+        "name": "John Smith",
+        "city": "Los Angeles",
+        "age": 62,
+        "gender": "Male",
+        "height": 178,
+        "weight": 85,
+        "bmi": 26.83
+    },
+    {
+        "id": "P003",
+        "name": "Emily White",
+        "city": "Chicago",
+        "age": 31,
+        "gender": "Female",
+        "height": 160,
+        "weight": 55,
+        "bmi": 21.48
+    },
+    {
+        "id": "P004",
+        "name": "Michael Brown",
+        "city": "Houston",
+        "age": 50,
+        "gender": "Male",
+        "height": 185,
+        "weight": 95,
+        "bmi": 27.77
+    },
+    {
+        "id": "P005",
+        "name": "Sarah Davis",
+        "city": "Phoenix",
+        "age": 28,
+        "gender": "Female",
+        "height": 170,
+        "weight": 60,
+        "bmi": 20.76
+    }
+]
