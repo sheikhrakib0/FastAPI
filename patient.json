@@ -7,7 +7,8 @@
         "gender": "Female",
         "height": 165,
         "weight": 70,
-        "bmi": 25.71
+        "bmi": 25.71,
+        "verdict": "normal"
     },
     {
         "id": "P002",
@@ -17,7 +18,8 @@
         "gender": "Male",
         "height": 178,
         "weight": 85,
-        "bmi": 26.83
+        "bmi": 26.83,
+        "verdict": "over weighted"
     },
     {
         "id": "P003",
@@ -27,7 +29,8 @@
         "gender": "Female",
         "height": 160,
         "weight": 55,
-        "bmi": 21.48
+        "bmi": 21.48,
+        "verdict": "normal"
     },
     {
         "id": "P004",
@@ -37,7 +40,8 @@
         "gender": "Male",
         "height": 185,
         "weight": 95,
-        "bmi": 27.77
+        "bmi": 27.77,
+        "verdict": "over weighted"
     },
     {
         "id": "P005",
@@ -47,6 +51,18 @@
         "gender": "Female",
         "height": 170,
         "weight": 60,
-        "bmi": 20.76
+        "bmi": 20.76,
+        "verdict": "under weighted"
+    },
+    {
+        "id": "P007",
+        "name": "karim",
+        "city": "dhaka",
+        "age": 67,
+        "gender": "male",
+        "height": 190,
+        "weight": 100.0,
+        "bmi": 27.7,
+        "verdict": "over weighted"
     }
 ]
