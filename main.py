@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Path, HTTPException, Query
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, computed_field
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Optional
 import json
 
 app = FastAPI()
@@ -34,6 +34,16 @@ class Patient(BaseModel):
             return "over weighted"
         else:
             return "obese"
+
+# Patient update class 
+class PatientUpdate(BaseModel):
+    name: Annotated[Optional[str], Field(default=None)]
+    city: Annotated[Optional[str], Field(default=None)]
+    age: Annotated[Optional[int], Field(gt=0,lt=120,description='Age fo the patient', default=None)]
+    gender: Annotated[Optional[Literal['male', 'female']], Field(description='Gender of the patient', default=None)]
+    height: Annotated[Optional[float], Field(gt=0, description='height of the patient in cm', default=None
+    )]
+    weight: Annotated[Optional[float], Field(gt=0, description='weight of the patient in kg', default=None)]
 
 
 # to laod the json file 
@@ -109,4 +119,20 @@ def create_patient(patient: Patient):
     save_data(data)
 
     return JSONResponse(status_code=201, content={'message': 'patient created successfully'})
+
+@app.put('/update/{patient_id}')
+def patient_update(patient_id: str, patient: PatientUpdate):
+    # laoding existing data
+    data = load_data()
+
+    id_exists = any(item.get('id') == patient_id for item in data)
+    if not id_exists:
+        raise HTTPException(status_code=400, detail='Patient not found')
+    
+    # extracting the targeted patients information for updating
+    targeted_patient = {}
+    for item in data:
+        if item['id'] == patient_id:
+            targeted_patient = patient
+
 
