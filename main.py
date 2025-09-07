@@ -12,7 +12,7 @@ class Patient(BaseModel):
     name: Annotated[str, Field(..., description='name of the patient')]
     city: Annotated[str, Field(..., description='City of the patient')]
     age: Annotated[int, Field(..., gt=0,lt=120,description='Age fo the patient')]
-    gender: Annotated[Literal['male', 'female'], Field(..., description='Gender of the patient')]
+    gender: Annotated[Literal['Male', 'Female'], Field(..., description='Gender of the patient')]
     height: Annotated[float, Field(..., gt=0, description='height of the patient in cm'
     )]
     weight: Annotated[float, Field(..., gt=0, description='weight of the patient in kg')]
@@ -40,7 +40,7 @@ class PatientUpdate(BaseModel):
     name: Annotated[Optional[str], Field(default=None)]
     city: Annotated[Optional[str], Field(default=None)]
     age: Annotated[Optional[int], Field(gt=0,lt=120,description='Age fo the patient', default=None)]
-    gender: Annotated[Optional[Literal['male', 'female']], Field(description='Gender of the patient', default=None)]
+    gender: Annotated[Optional[Literal['Male', 'Female']], Field(description='Gender of the patient', default=None)]
     height: Annotated[Optional[float], Field(gt=0, description='height of the patient in cm', default=None
     )]
     weight: Annotated[Optional[float], Field(gt=0, description='weight of the patient in kg', default=None)]
@@ -130,9 +130,53 @@ def patient_update(patient_id: str, patient: PatientUpdate):
         raise HTTPException(status_code=400, detail='Patient not found')
     
     # extracting the targeted patients information for updating
-    targeted_patient = {}
+    targeted_patient_in_db = {}
     for item in data:
         if item['id'] == patient_id:
-            targeted_patient = patient
+            targeted_patient_in_db = item
 
+    patient_updated_info = patient.model_dump(exclude_unset=True) #exclude_unset=true means it ignores empty fields
+    for key, value in patient_updated_info.items():
+        targeted_patient_in_db[key] = value
 
+    # creating a new patient pydantic obj
+    patient_pydantic_obj = Patient(**targeted_patient_in_db)
+    # pydantic obj to dict
+    updated_patien_info = patient_pydantic_obj.model_dump()
+
+    #updating in db
+    for item in data:
+        if item['id'] == patient_id:
+            for key, value in updated_patien_info.items():
+                item[key] = value 
+    #saving data 
+    save_data(data)
+    
+    return JSONResponse(status_code=201, content={'message': 'patient updated successfully'})
+
+# Creating a delete route
+@app.delete('/delete/{patient_id}')
+def delete_patient(patient_id: str):
+
+    #loading data
+    data = load_data()
+
+    # checking if the data is available or not
+    id_exists = any(item.get('id') == patient_id for item in data)
+    if not id_exists:
+        raise HTTPException(status_code=400, detail='Patient not found')
+
+    # deleting that existing patient
+    updated_data = [item for item in data if item.get('id') != patient_id]
+    
+    #putting back the new list to the file
+    with open("patient.json", 'w') as f:
+        json.dump(updated_data, f)
+    # for item in data:
+    #     if item['id'] == patient_id:
+    #         print(item)
+    #         del item
+    #saving the data
+    # save_data(data)
+
+    return JSONResponse(status_code=201, content={"message": "patient deleted successfully"})

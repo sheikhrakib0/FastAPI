@@ -45,24 +45,24 @@
     },
     {
         "id": "P005",
-        "name": "Sarah Davis",
+        "name": "Sarah Dave",
         "city": "Phoenix",
-        "age": 28,
+        "age": 35,
         "gender": "Female",
-        "height": 170,
-        "weight": 60,
-        "bmi": 20.76,
-        "verdict": "under weighted"
+        "height": 170.0,
+        "weight": 80.0,
+        "bmi": 27.68,
+        "verdict": "over weighted"
     },
     {
-        "id": "P007",
-        "name": "karim",
-        "city": "dhaka",
-        "age": 67,
-        "gender": "male",
-        "height": 190,
+        "id": "P006",
+        "name": "Amir Khan",
+        "city": "Mumbai",
+        "age": 54,
+        "gender": "Female",
+        "height": 180.0,
         "weight": 100.0,
-        "bmi": 27.7,
-        "verdict": "over weighted"
+        "bmi": 30.86,
+        "verdict": "obese"
     }
 ]
