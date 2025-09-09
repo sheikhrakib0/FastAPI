@@ -41,7 +41,7 @@ class UserInput(BaseModel):
 # Building endpoint
 @app.get('/')
 def get():
-    
+
     return "Welcome the Insurance API"
 
 @app.post('/predict')
@@ -55,4 +55,4 @@ def predict(data: UserInput):
         "lifestyle_risk":data.lifestyle_risk
     }])
     result = model.predict(input_df)[0]
-    return JSONResponse(status_code=200, content={"Predicted Category:": result})
+    return JSONResponse(status_code=200, content={"Predicted Category": result})
