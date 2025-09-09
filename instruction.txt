@@ -4,3 +4,7 @@
     >uvicorn main:app --reload
 4. To exit the server 
     Ctrl + C
+
+5. To run the streamlit server 
+    >streamlit run file_name.py
+    
